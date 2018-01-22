@@ -1,0 +1,206 @@
+{% extends "blog/base.html" %}
+
+{% block content %}
+<div class="row">
+
+    <!-- Post Content Column -->
+    <div class="col-lg-8">
+        {% for object in object_list %}
+
+            <!-- Title -->
+            <h1 class="mt-4"><a href="{% url 'post' slug=object.slug%}">{{ object.title }}</a></h1>
+
+            <!-- Author -->
+            <p class="lead">by {{ object.author }}</p>
+
+            <!-- Date/Time -->
+            <p>Posted on {{ object.date }} ({{ object.category.title }})</p>
+
+            <hr>
+
+            {% comment %}
+                <!-- Preview Image -->
+                <img class="img-fluid rounded" src="http://placehold.it/900x300" alt="">
+                <hr>
+            {% endcomment %}
+
+            <!-- Post Content -->
+            {{ object.excerpt |safe}}
+
+            <hr>
+
+
+
+            <!-- Comments Form -->
+            {% comment %}
+                <div class="card my-4">
+                    <h5 class="card-header">Leave a Comment:</h5>
+                    <div class="card-body">
+                        <form>
+                            <div class="form-group">
+                                <textarea class="form-control" rows="3"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            {% endcomment %}
+
+            {% for comment in object.comment_set.all %}
+
+                <!-- Single Comment -->
+                <div class="media mb-4">
+                    <img class="d-flex mr-3 rounded-circle" src="{{ comment.gravatar_url }}" alt="" width="5%">
+                    <div class="media-body">
+                        <h5 class="mt-0">{{ comment.author }}</h5>
+                        {{ comment.content }}
+                    </div>
+                </div>
+            {% endfor %}
+
+        {% endfor %}
+
+    </div>
+
+    <!-- Sidebar Widgets Column -->
+    <div class="col-md-4">
+
+        {% comment %}
+            <!-- Search Widget -->
+            <div class="card my-4">
+                <h5 class="card-header">Search</h5>
+                <div class="card-body">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search for...">
+                        <span class="input-group-btn">
+                            <button class="btn btn-secondary" type="button">Go!</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        {% endcomment %}
+
+        <!-- Categories Widget -->
+        <div class="card my-4">
+            <h5 class="card-header">Categories</h5>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <ul class="list-unstyled mb-0">
+                            {% for category in category_list %}
+                                <li>
+                                    <a href="{{ category.get_absolute_url }}">{{ category.title }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Side Widget -->
+        <div class="card my-4">
+            <h5 class="card-header">Side Widget</h5>
+            <div class="card-body">
+                Hi! This is me.
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.row -->
+
+
+{% endblock %}
+
+
+
+{% comment %}
+
+{% extends "blog/base.html" %}
+
+
+{% block contenuto %}
+<h1> Il mio blog</h1>
+
+{% for object in object_list %}
+    <h2>{{ object.title }}</h2>
+    <b>{{ object.category.title }}</b>
+    <p>{{ object.content }}</p>
+    <p>{{ object.date }}</p>
+
+    {% for comment in object.comment_set.all %}
+
+    {{ comment.author }} on {{ comment.date }} wrote:
+
+    {{ comment.content }}
+    {% endfor %}
+{% endfor %}
+
+
+<p style="text-align:center;">
+    Io sono <b>Caterina Magini</b>
+</p>
+<p>
+    La mia <a href="/ciao/" target="_top"> prima vista con Django</a>
+</p>
+
+
+
+<hr>
+
+<span>
+    <a href="https://it.wikipedia.org/wiki/Gustav_Klimt"> <img src="https://m2.paperblog.com/i/225/2254999/serpenti-dacqua-gustav-klimt-L-QA8R1e.jpeg" width="13.5%" height="215">  </a>
+<!--<p>Particolare tratto da <cite>Serpenti d'acqua 2</cite> di Gustav Klimt</p> -->
+</span>
+
+<span>
+    <a href= "https://it.wikipedia.org/wiki/Marc_Chagall"> <img src="http://www.chagall.it/inserimento/img/immagine846201.jpg" width="13.5%" height="215"> </a>
+</span>
+
+<span>
+    <a href="https://it.wikipedia.org/wiki/Vasilij_Vasil%27evi%C4%8D_Kandinskij"> <img src="http://2.bp.blogspot.com/-xXKd6g_-1XQ/Uiuun38wb4I/AAAAAAAC2nE/DYdxsz-MYUU/s1600/Wassily+Kandinsky+-+Tutt'Art@+(5).jpg" width="13.5%" height="215"> </a>
+</span>
+
+<span>
+    <a href="https://it.wikipedia.org/wiki/Salvador_Dal%C3%AD"> <img  src="http://www.artemagazine.it/media/k2/items/cache/e85ebb8e2b4a906084aaf2d0a18bd568_XL.jpg" width="13.5%" height="215"> </a>
+</span>
+
+<span>
+    <a href="https://it.wikipedia.org/wiki/Ren%C3%A9_Magritte"> <img src="http://4.bp.blogspot.com/_Y3KOfxZu7n0/SNZZNoodl2I/AAAAAAAACnI/HFAFFLINlXE/s400/magritte_il_vestito_di_notte.jpg" width="13.5%" height="215"> </a>
+</span>
+
+<span>
+    <a href="https://it.wikipedia.org/wiki/Maurits_Cornelis_Escher"> <img src="https://dilettantemaledetto.files.wordpress.com/2014/11/escher_hands.png" width="13.5%" height="215"> </a>
+</span>
+
+<span>
+    <a href="https://it.wikipedia.org/wiki/Joan_Mir%C3%B3"> <img src="http://www.archetipoac.it/files/2014/09/miro-300x257.jpg" width="13.5%"height="215"> </a>
+</span>
+
+<hr>
+<h2>Citazioni letterarie</h2>
+
+<p title="Citazioni letterarie">
+
+
+«Ma allora, cos’è che ti conforta?» <br>
+«La certezza della mia libertà interiore,»<br>
+disse lui dopo aver riflettuto<br>
+«questo bene prezioso, inalterabile, e che dipende solo da me perdere o conservare.<br>
+La convinzione che le passioni spinte al parossismo come capita ora finiscano poi per placarsi.<br>
+Che tutto ciò che ha un inizio avrà una fine. In poche parole, che le catastrofi passano<br>
+e che bisogna cercare di non andarsene prima di loro, ecco tutto.<br>
+Perciò prima di tutto vivere: Primum vivere. Giorno per giorno. Resistere, attendere, sperare».<br>
+<br>
+(<a href="https://it.wikipedia.org/wiki/Ir%C3%A8ne_N%C3%A9mirovsky" target="_blank"><b>Irène Némirovsky</b> </a>,<i> Suite francese</i>)
+</p>
+
+<a href="poesie/" target="_top"> poesie</a>
+
+
+
+{% endblock %}
+{% endcomment %}
+
+
+

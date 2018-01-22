@@ -1,0 +1,9 @@
+dy {
+    padding-top: 54px;
+}
+
+@media screen and (min-width: 240px) {   /* gli sto dicendo che se trova uno schermo di meno di 992px di settarmi il padding top a 56 px */
+    body {
+        padding-top: 56px;
+    }
+}
